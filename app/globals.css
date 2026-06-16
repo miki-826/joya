@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+:root {
+  --washi: #f7f3e9;
+  --panel: #f5e0b7;
+  --ink: #2d1b00;
+  --ink-sub: #6b4f1d;
+  --accent: #c19a6b;
+  --bonnou: #e4572e;
+  --muro: #4cb944;
+  --border: #bfa77a;
+  --btn: #e6c48b;
+  --btn-hover: #d9b77c;
+  --font-brush: "Yuji Syuku", serif;
+  --font-mincho: "Shippori Mincho", serif;
+}
+
+@theme inline {
+  --color-washi: var(--washi);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --color-ink-sub: var(--ink-sub);
+  --color-accent: var(--accent);
+  --color-bonnou: var(--bonnou);
+  --color-muro: var(--muro);
+  --color-border: var(--border);
+  --color-btn: var(--btn);
+  --color-btnh: var(--btn-hover);
+  --font-brush: var(--font-brush);
+  --font-mincho: var(--font-mincho);
+}
+
+html {
+  background: var(--washi);
+}
+body {
+  /* 負のz-indexの背景画像を隠さないため body は透過にする */
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-mincho);
+}
+
+.font-brush {
+  font-family: var(--font-brush);
+}
+.font-mincho {
+  font-family: var(--font-mincho);
+}
+
+/* 和紙の質感 */
+.washi-tex {
+  background-color: var(--washi);
+  background-image:
+    radial-gradient(rgba(120, 90, 40, 0.05) 1px, transparent 1px),
+    radial-gradient(rgba(120, 90, 40, 0.04) 1px, transparent 1px);
+  background-size: 7px 7px, 13px 13px;
+  background-position: 0 0, 4px 6px;
+}
+
+/* 墨の縦書き */
+.tategaki {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+@keyframes fudaIn {
+  0% {
+    transform: translateY(28px) rotate(-2deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+}
+.fuda-in {
+  animation: fudaIn 0.32s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+@keyframes swipeRight {
+  to {
+    transform: translateX(140%) rotate(16deg);
+    opacity: 0;
+  }
+}
+@keyframes swipeLeft {
+  to {
+    transform: translateX(-140%) rotate(-16deg);
+    opacity: 0;
+  }
+}
+.swipe-right {
+  animation: swipeRight 0.3s ease-in forwards;
+}
+.swipe-left {
+  animation: swipeLeft 0.3s ease-in forwards;
+}
+
+@keyframes bellRing {
+  0% {
+    transform: rotate(0);
+  }
+  20% {
+    transform: rotate(-9deg);
+  }
+  45% {
+    transform: rotate(7deg);
+  }
+  70% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+.bell-ring {
+  animation: bellRing 0.7s ease-in-out;
+  transform-origin: top center;
+}
+
+@keyframes ringPulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.ring-pulse {
+  animation: ringPulse 0.7s ease-out forwards;
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.float-y {
+  animation: floatY 4s ease-in-out infinite;
+}
+
+@keyframes stampIn {
+  0% {
+    transform: scale(2) rotate(-12deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.9) rotate(-6deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-8deg);
+    opacity: 1;
+  }
+}
+.stamp-in {
+  animation: stampIn 0.45s cubic-bezier(0.2, 1.2, 0.3, 1) both;
+}

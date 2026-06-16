@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($u = [Environment]::GetEnvironmentVariable\\('OPENAI_API_KEY','User'\\); $m = [Environment]::GetEnvironmentVariable\\('OPENAI_API_KEY','Machine'\\); $p = $env:OPENAI_API_KEY; \"Process: \" + \\($\\(if\\($p\\){$p.Substring\\(0,[Math]::Min\\(7,$p.Length\\)\\)+'...\\('+$p.Length+'\\)'}else{'\\(none\\)'}\\)\\); \"User: \" + \\($\\(if\\($u\\){$u.Substring\\(0,[Math]::Min\\(7,$u.Length\\)\\)+'...\\('+$u.Length+'\\)'}else{'\\(none\\)'}\\)\\); \"Machine: \" + \\($\\(if\\($m\\){$m.Substring\\(0,[Math]::Min\\(7,$m.Length\\)\\)+'...\\('+$m.Length+'\\)'}else{'\\(none\\)'}\\)\\))",
+      "PowerShell(npx --yes create-next-app@latest . --ts --tailwind --app --no-src-dir --eslint --use-npm --no-turbopack --disable-git --yes)",
+      "PowerShell($root = \"C:\\\\Users\\\\micke\\\\OneDrive\\\\Desktop\\\\claude専用ファイル\\\\除夜の鐘\"; Get-ChildItem -Path \"$root\\\\joya\" -Force | ForEach-Object { Move-Item -Path $_.FullName -Destination $root -Force }; Remove-Item \"$root\\\\joya\" -Recurse -Force; \"moved\"; Get-ChildItem $root -Force | Select-Object Name)",
+      "PowerShell($real = [Environment]::GetEnvironmentVariable\\('OPENAI_API_KEY','User'\\); if \\($real -and $real.StartsWith\\('sk-'\\)\\) { $env:OPENAI_API_KEY = $real }; node gen-all.mjs)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
