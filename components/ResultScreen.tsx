@@ -47,7 +47,7 @@ export function ResultScreen({
               src="/images/rank-seal.png"
               alt=""
               fill
-              className="object-contain mix-blend-multiply"
+              className="object-contain drop-shadow-[1px_2px_4px_rgba(45,27,0,0.3)]"
               fallback={
                 <span
                   className="absolute inset-0 rounded-full border-[6px]"
@@ -72,13 +72,23 @@ export function ResultScreen({
 
         {/* 集計 */}
         <div className="mt-6 grid grid-cols-2 gap-3">
-          <div className="rounded-md border-2 border-muro/60 bg-panel/80 p-4 text-center">
-            <p className="font-mincho text-xs text-ink-sub">見抜いた数</p>
-            <p className="font-brush text-4xl text-muro">{result.correct}</p>
+          <div className="rounded-md border-2 border-muro/70 bg-muro/10 p-4 text-center">
+            <p className="font-mincho text-sm text-ink-sub">
+              <span className="text-muro">◯</span> 正解（見抜いた）
+            </p>
+            <p className="font-brush mt-1 text-4xl text-muro">
+              {result.correct}
+              <span className="text-xl"> / {result.total}</span>
+            </p>
           </div>
-          <div className="rounded-md border-2 border-bonnou/60 bg-panel/80 p-4 text-center">
-            <p className="font-mincho text-xs text-ink-sub">惑わされた数</p>
-            <p className="font-brush text-4xl text-bonnou">{result.wrong}</p>
+          <div className="rounded-md border-2 border-bonnou/70 bg-bonnou/10 p-4 text-center">
+            <p className="font-mincho text-sm text-ink-sub">
+              <span className="text-bonnou">✕</span> 不正解（惑わされた）
+            </p>
+            <p className="font-brush mt-1 text-4xl text-bonnou">
+              {result.wrong}
+              <span className="text-xl"> / {result.total}</span>
+            </p>
           </div>
         </div>
 
@@ -89,7 +99,7 @@ export function ResultScreen({
             alt="AI住職"
             width={64}
             height={64}
-            className="h-14 w-14 shrink-0 object-contain mix-blend-multiply"
+            className="h-14 w-14 shrink-0 object-contain"
             fallback={<span className="text-4xl">🧑‍🦲</span>}
           />
           <div>
@@ -102,29 +112,44 @@ export function ResultScreen({
 
         {/* 間違えた札 */}
         {result.mistakes.length > 0 && (
-          <div className="mt-5">
-            <p className="font-brush mb-2 text-lg text-ink">
-              惑わされた札の解説
+          <div className="mt-6">
+            <p className="font-brush mb-1 text-xl text-ink">
+              ✕ ここを間違えた（{result.mistakes.length}枚）
             </p>
-            <ul className="space-y-2">
+            <p className="font-mincho mb-3 text-xs text-ink-sub">
+              あなたの判定と、正しい判定を見比べてみよう。
+            </p>
+            <ul className="space-y-3">
               {result.mistakes.map((m, i) => (
                 <li
                   key={i}
-                  className="rounded-md border border-border/70 bg-washi/80 p-3"
+                  className="overflow-hidden rounded-lg border-2 border-bonnou/50 bg-washi/85 shadow-sm"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-mincho text-ink">{m.text}</span>
-                    <span
-                      className="font-brush shrink-0 rounded px-2 py-0.5 text-sm text-washi"
-                      style={{
-                        background:
-                          m.type === "煩悩" ? "var(--bonnou)" : "var(--muro)",
-                      }}
-                    >
-                      正解：{m.type}
-                    </span>
+                  <p className="font-brush border-b border-border/60 bg-panel/70 px-3 py-2 text-lg text-ink">
+                    「{m.text}」
+                  </p>
+                  <div className="flex items-stretch divide-x divide-border/60 text-center">
+                    <div className="flex-1 p-2">
+                      <p className="font-mincho text-[11px] text-ink-sub">
+                        あなたの判定
+                      </p>
+                      <p className="font-brush text-lg text-bonnou">
+                        ✕ {m.yours}
+                      </p>
+                    </div>
+                    <div className="flex items-center px-2 font-brush text-ink-sub">
+                      →
+                    </div>
+                    <div className="flex-1 p-2">
+                      <p className="font-mincho text-[11px] text-ink-sub">
+                        正しくは
+                      </p>
+                      <p className="font-brush text-lg text-muro">
+                        ◯ {m.type}
+                      </p>
+                    </div>
                   </div>
-                  <p className="font-mincho mt-1 text-xs text-ink-sub">
+                  <p className="font-mincho border-t border-border/60 px-3 py-2 text-xs leading-relaxed text-ink-sub">
                     {m.reason}
                   </p>
                 </li>

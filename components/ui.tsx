@@ -98,7 +98,7 @@ export function Hanko({
           src={img}
           alt={label}
           fill
-          className="object-contain mix-blend-multiply"
+          className="object-contain drop-shadow-[1px_2px_2px_rgba(45,27,0,0.25)]"
           fallback={
             <span
               className="absolute inset-0 rounded-full border-4"

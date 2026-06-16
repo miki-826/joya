@@ -164,7 +164,7 @@ export function GameScreen({
             alt="AI住職"
             width={96}
             height={96}
-            className="h-20 w-20 object-contain mix-blend-multiply"
+            className="h-20 w-20 object-contain drop-shadow-[1px_2px_3px_rgba(45,27,0,0.35)]"
             fallback={<span className="text-5xl">🧑‍🦲</span>}
           />
           <p className="font-brush max-w-[9rem] text-sm text-ink">
@@ -178,7 +178,7 @@ export function GameScreen({
               alt="鐘"
               width={88}
               height={88}
-              className="h-20 w-20 object-contain mix-blend-multiply"
+              className="h-20 w-20 object-contain drop-shadow-[1px_2px_3px_rgba(45,27,0,0.35)]"
               fallback={<span className="text-5xl">🔔</span>}
             />
           </div>
@@ -234,7 +234,7 @@ export function GameScreen({
               src="/images/mokufuda.png"
               alt=""
               fill
-              className="object-contain mix-blend-multiply drop-shadow-[4px_6px_8px_rgba(45,27,0,0.25)]"
+              className="object-contain drop-shadow-[4px_8px_10px_rgba(45,27,0,0.4)]"
               fallback={
                 <div className="absolute inset-0 rounded-[14px] border-4 border-ink/60 bg-gradient-to-b from-[#e8cf9a] to-[#d4b878] shadow-inner" />
               }
