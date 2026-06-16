@@ -126,26 +126,10 @@ export function HowtoScreen({
           </p>
         </div>
 
-        {/* 札の見分け方（例） */}
+        {/* 札の見分け方（例）— 振り分け図に合わせ 無漏=左 / 煩悩=右 */}
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-lg border-2 border-bonnou/50 bg-panel/80 p-3">
-            <p className="font-brush text-lg text-bonnou">これは「煩悩」</p>
-            <p className="font-mincho mb-2 text-xs text-ink-sub">
-              欲・執着・怒り・嫉妬など
-            </p>
-            <ul className="space-y-1">
-              {BONNOU_EX.map((t) => (
-                <li
-                  key={t}
-                  className="font-mincho rounded bg-bonnou/10 px-2 py-1 text-sm text-ink"
-                >
-                  「{t}」
-                </li>
-              ))}
-            </ul>
-          </div>
           <div className="rounded-lg border-2 border-muro/50 bg-panel/80 p-3">
-            <p className="font-brush text-lg text-muro">これは「無漏」</p>
+            <p className="font-brush text-lg text-muro">← これは「無漏」</p>
             <p className="font-mincho mb-2 text-xs text-ink-sub">
               無私・善行・感謝など
             </p>
@@ -154,6 +138,22 @@ export function HowtoScreen({
                 <li
                   key={t}
                   className="font-mincho rounded bg-muro/10 px-2 py-1 text-sm text-ink"
+                >
+                  「{t}」
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-lg border-2 border-bonnou/50 bg-panel/80 p-3">
+            <p className="font-brush text-lg text-bonnou">これは「煩悩」 →</p>
+            <p className="font-mincho mb-2 text-xs text-ink-sub">
+              欲・執着・怒り・嫉妬など
+            </p>
+            <ul className="space-y-1">
+              {BONNOU_EX.map((t) => (
+                <li
+                  key={t}
+                  className="font-mincho rounded bg-bonnou/10 px-2 py-1 text-sm text-ink"
                 >
                   「{t}」
                 </li>

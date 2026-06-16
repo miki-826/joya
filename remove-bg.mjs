@@ -3,16 +3,15 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { PNG } from "pngjs";
 
-const TARGETS = [
-  "monk",
-  "mokufuda",
-  "bell",
-  "bonnou-stamp",
-  "muro-stamp",
-  "rank-seal",
-];
-const TOL = 58; // ここ未満は完全に背景
-const TOL2 = 125; // ここ以上は被写体。間はフェザー
+// 引数: [target] [TOL] [TOL2]
+// 例) 全件: node remove-bg.mjs
+//     住職のみ慎重に: node remove-bg.mjs monk 26 52
+const [, , argTarget, argTol, argTol2] = process.argv;
+const TARGETS = argTarget
+  ? [argTarget]
+  : ["monk", "mokufuda", "bell", "bonnou-stamp", "muro-stamp", "rank-seal"];
+const TOL = argTol ? Number(argTol) : 58; // ここ未満は完全に背景
+const TOL2 = argTol2 ? Number(argTol2) : 125; // ここ以上は被写体。間はフェザー
 
 function dist(d, i, r, g, b) {
   const dr = d[i] - r,
