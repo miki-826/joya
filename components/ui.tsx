@@ -39,7 +39,7 @@ export function SafeImage({
   );
 }
 
-/** 墨書き風プライマリボタン */
+/** 本物の木の板（wood-button.png）を背景にした木札ボタン */
 export function SumiButton({
   children,
   onClick,
@@ -53,20 +53,57 @@ export function SumiButton({
   className?: string;
   disabled?: boolean;
 }) {
-  const base =
-    "relative font-brush tracking-widest transition-all duration-150 active:translate-y-0.5 disabled:opacity-50 disabled:active:translate-y-0 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/40";
-  const styles =
-    variant === "primary"
-      ? "bg-[var(--btn)] hover:bg-[var(--btnh)] text-ink border-[3px] border-ink/80 shadow-[3px_3px_0_0_rgba(45,27,0,0.55)] hover:shadow-[4px_5px_0_0_rgba(45,27,0,0.55)] px-9 py-3 text-2xl"
-      : "bg-transparent text-ink-sub border-2 border-ink-sub/50 hover:border-ink-sub hover:text-ink px-6 py-2 text-lg";
+  const big = variant === "primary";
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`${base} ${styles} ${className}`}
+      className={`relative inline-grid place-items-center overflow-hidden rounded-md shadow-[3px_5px_8px_rgba(45,27,0,0.45)] transition-all duration-150 hover:brightness-105 active:translate-y-0.5 active:shadow-[2px_2px_5px_rgba(45,27,0,0.45)] disabled:opacity-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/50 ${
+        big ? "min-w-[15rem] px-10 py-4" : "min-w-[11rem] px-7 py-3"
+      } ${className}`}
     >
-      {children}
+      <SafeImage
+        src="/images/wood-button.png"
+        alt=""
+        fill
+        className="object-fill"
+        fallback={
+          <span className="absolute inset-0 border-[3px] border-[#3b2a16] bg-[#9c6b3f]" />
+        }
+      />
+      <span
+        className={`font-brush relative z-10 tracking-widest text-[#f8f1e0] [text-shadow:0_2px_3px_rgba(0,0,0,0.75)] ${
+          big ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"
+        }`}
+      >
+        {children}
+      </span>
     </button>
+  );
+}
+
+/** 本物の木の板（wood-panel.png）を背景にしたパネル。お寺の高札風。 */
+export function WoodPanel({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`relative overflow-hidden rounded-xl border-[3px] border-[#3b2a16] shadow-[2px_4px_8px_rgba(45,27,0,0.3)] ${className}`}
+    >
+      <SafeImage
+        src="/images/wood-panel.png"
+        alt=""
+        fill
+        className="object-cover"
+        fallback={<span className="absolute inset-0 bg-[#cda876]" />}
+      />
+      <span className="absolute inset-0 bg-[#3b2a16]/[0.04]" />
+      <div className="relative">{children}</div>
+    </div>
   );
 }
 
@@ -93,7 +130,7 @@ export function Hanko({
         active ? "scale-105" : ""
       }`}
     >
-      <span className="relative grid h-24 w-24 place-items-center sm:h-28 sm:w-28">
+      <span className="relative grid h-28 w-28 place-items-center sm:h-32 sm:w-32">
         <SafeImage
           src={img}
           alt={label}
@@ -106,11 +143,17 @@ export function Hanko({
             />
           }
         />
-        <span
-          className="font-brush relative text-3xl font-bold sm:text-4xl"
-          style={{ color }}
-        >
-          {label}
+        {/* 2文字を縦に積んで円の内側にきっちり収める */}
+        <span className="relative flex h-[52%] w-[52%] flex-col items-center justify-center">
+          {label.split("").map((ch, i) => (
+            <span
+              key={i}
+              className="font-brush font-bold leading-[0.92] text-ink drop-shadow-[0_1px_0_rgba(247,243,233,0.6)]"
+              style={{ fontSize: "clamp(1.1rem, 6vw, 1.6rem)" }}
+            >
+              {ch}
+            </span>
+          ))}
         </span>
       </span>
       {hint && (

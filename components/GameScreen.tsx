@@ -7,6 +7,15 @@ import { playBell, playCorrect, playWrong, playTap } from "@/lib/sound";
 const TOTAL_TIME = 100;
 const SWIPE_THRESHOLD = 90;
 
+/** 文字数に応じて木札内に収まるフォントサイズを返す */
+function cardFontSize(len: number): string {
+  if (len <= 7) return "1.5rem";
+  if (len <= 11) return "1.2rem";
+  if (len <= 15) return "1.05rem";
+  if (len <= 20) return "0.92rem";
+  return "0.82rem";
+}
+
 export function GameScreen({
   cards,
   mode,
@@ -229,7 +238,7 @@ export function GameScreen({
                 }
           }
         >
-          <div className="relative grid h-[360px] w-[250px] place-items-center sm:h-[400px] sm:w-[280px]">
+          <div className="relative h-[360px] w-[250px] sm:h-[400px] sm:w-[280px]">
             <SafeImage
               src="/images/mokufuda.png"
               alt=""
@@ -239,9 +248,15 @@ export function GameScreen({
                 <div className="absolute inset-0 rounded-[14px] border-4 border-ink/60 bg-gradient-to-b from-[#e8cf9a] to-[#d4b878] shadow-inner" />
               }
             />
-            <p className="font-brush relative max-w-[78%] text-center text-2xl leading-relaxed text-ink sm:text-[1.7rem]">
-              {card.text}
-            </p>
+            {/* 木札の本体(尖った上部を避けた中央)に文字を必ず収める */}
+            <div className="absolute left-1/2 top-[55%] flex w-[55%] -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+              <p
+                className="font-brush text-center leading-snug text-ink"
+                style={{ fontSize: cardFontSize(card.text.length) }}
+              >
+                {card.text}
+              </p>
+            </div>
           </div>
 
           {/* 判定フラッシュ */}
